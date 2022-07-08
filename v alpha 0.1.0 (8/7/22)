@@ -1,0 +1,85 @@
+// v alpha 0.1.0
+using System;
+// was never a project that i wanted to actually finish, but i decided to finish it anyway
+// - willdevstill 7/7/22
+public class Program
+{
+	public static string[] location = {"bounties", "blacksmith", "general store", "train station"};
+	public static string locAsk = "";
+	public static bool noLoc = false;
+	public static void bounties() 
+	{
+		Console.WriteLine("");
+		Console.WriteLine("___________________________");
+	}
+	public static void blacksmith()
+	{
+		
+	}
+	public static void generalStore()
+	{
+		
+	}
+	public static void trainStation()
+	{
+		
+	}	
+	public static void askLoc() 
+	{
+		if (noLoc == true)
+		{
+			Console.WriteLine("");
+			Console.WriteLine("sorry, location " + locAsk + " does not exist,");
+			Console.WriteLine("please try again");
+		}	
+		Console.WriteLine("");
+		Console.WriteLine("where would you like to go?");
+		foreach (var i in location)
+		{
+			Console.WriteLine(i);
+		}
+		Console.WriteLine("");
+		locAsk = Console.ReadLine();
+		switch (locAsk) 
+		{
+			case "bounties":
+				bounties();
+				break;
+			case "blacksmith":
+				blacksmith();
+				break;
+			case "general store":
+				generalStore();
+				break;
+			case "train station":
+				trainStation();
+				break;
+			default:
+				noLoc = true;
+				askLoc();
+				break;
+		}		
+	}	
+	public static void intro()
+	{
+		Console.WriteLine("howdy partner");
+		Console.WriteLine("whats yer name?");
+		cowboyname = Console.ReadLine();
+		Console.WriteLine("hello " + cowboyname + "!");
+		Console.WriteLine("welcome to westown, population 321");
+		Console.WriteLine("youll start with a revolver, $100, and a horse");
+		Console.WriteLine("you can collect bounties at the center of town");
+		Console.WriteLine("the blacksmith sells guns and bullets");
+		Console.WriteLine("the general store has food, clothes, and better horses");
+		Console.WriteLine("the train station has trains come every once and a while, ");
+		Console.WriteLine("and when they do, the have limited time goods");
+		Console.WriteLine("if you commit any crimes, you can become an outlaw");
+		Console.WriteLine("this means that other cowboys are more likely to attack or kill you");
+	}	
+	public static string cowboyname = "default";
+	public static void Main()
+	{
+		intro();
+		askLoc();
+	}
+}
