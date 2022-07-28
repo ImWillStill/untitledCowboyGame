@@ -1,0 +1,309 @@
+// v alpha 0.2.5
+using System;
+/* 
+was never a project that i wanted to actually finish, but i decided to finish it anyway
+- willdevstill 7/7/22
+
+inventory chaos and stuff, gonna figure out how to make the shop work
+- willdevstill 7/15/22 (wow its been long)
+
+fixed shop so you can't purchase things and get negative money. inventory works now i guess, bug fixes.
+- willdevstill 7/18/22
+
+shop works now, just gotta do the combat system and blacksmith, train station too.
+- willdevstill 7/28/22
+*/
+public class Program
+{
+	public static string[] location = {"bounties", "blacksmith", "general store", "train station", "stats"};
+	public static string[] inv = {"revolver"};
+	public static string[] shop = {"apple - +5 hp - $2", "lucky charm - +5 acc - $15", "hollow points - +10 acc, -5 dmg - $25", "apple pie - +10 hp - $5", "box o' mystery - 1-in-8 chance to do 25 dmg (1 time use) - $35"};
+	public static int lengthOfInvForTechnicalReasons = inv.Length;
+	public static string locAsk = "";
+	public static string whatDoAtLoc = "";
+	public static bool noLoc = false;
+	public static int money = 100;
+	public static int health = 100;
+	public static int dmg = 20;
+	public static int ammo = 20;
+	public static int acc = 5;
+	public static void battleStats()
+	{
+		Console.WriteLine("");
+		Console.WriteLine("stats:");
+		Console.WriteLine("");
+		Console.WriteLine("health: " + health);
+		Console.WriteLine("accuracy: " + acc);
+		Console.WriteLine("damage: " + dmg);
+		Console.WriteLine("ammo: " + ammo);
+		Console.WriteLine("inventory:");
+		foreach (var i in inv) 
+		{
+			Console.WriteLine(i + ", ");
+		}
+	}
+	public static void battle()
+	{
+		Console.WriteLine("you are now battling a cowboy!");
+	}
+	public static void bounties() 
+	{
+		Console.WriteLine("");
+		Console.WriteLine("___________________________");
+		Console.WriteLine("|                         |");
+		Console.WriteLine("|      BOUNTY BOARD:      |");
+		Console.WriteLine("|                         |");
+		Console.WriteLine("|                         |");
+		Console.WriteLine("|                         |");
+		Console.WriteLine("|                         |");
+		Console.WriteLine("|                         |");
+		Console.WriteLine("|_________________________|");
+		Console.WriteLine(@"|/                       \|");
+		Console.WriteLine("||                       ||");
+		Console.WriteLine("||                       ||");
+		Console.WriteLine("||                       ||");
+		Console.WriteLine("||                       ||");
+		Console.WriteLine("||                       ||");
+		Console.WriteLine("");
+		Console.WriteLine("what would you like to do?");
+		whatDoAtLoc = Console.ReadLine();
+		switch (whatDoAtLoc)
+		{
+			case "look at bounties":
+				Console.WriteLine("under construction, will come out in 0.2 (jk it will come out in 0.9 HAHAHAHAH)");
+				whatDoAtLoc = Console.ReadLine();
+				break;
+			case "leave":
+				Console.WriteLine("goodbye!");
+				System.Threading.Thread.Sleep(1000);
+				askLoc();
+				break;
+		}		
+	}
+	
+	public static void blacksmith()
+	{
+		
+	}
+	public static void generalStore()
+	{
+		System.Threading.Thread.Sleep(500);
+		Console.WriteLine("welcome to the general store");
+		Console.WriteLine("");
+		Console.WriteLine("stuff you can buy:");
+		Console.WriteLine("");
+		foreach (var i in shop)
+		{
+			Console.WriteLine(i);
+		}
+		Console.WriteLine("");
+		Console.WriteLine("you have " + money + " dollars");
+		Console.WriteLine("would you like to buy something?");
+		string buyYN = Console.ReadLine();
+		string askToBuy = "";
+		if (buyYN == "yes")
+		{
+			Console.WriteLine("what would you like to buy?");
+			askToBuy = Console.ReadLine();
+			switch (askToBuy)
+			{
+				case "apple":
+					if (money >= 2)
+					{
+						money -= 2;
+					} 
+					else
+					{
+						Console.WriteLine("you do not have enough money to purchase this");
+						Console.WriteLine("would you like to buy something?");
+					}
+					Array.Resize<string>(ref inv, lengthOfInvForTechnicalReasons++);
+					inv[inv.Length-1] = "apple";
+					Console.WriteLine("");
+					Console.WriteLine("you have " + money + " dollars");
+					Console.WriteLine("would you like to buy something?");
+					string buyYN = "";
+					buyYN = Console.ReadLine();
+					break;
+				case "lucky charm":
+					if (money >= 15)
+					{
+						money -= 15;
+					}
+					else 
+					{
+						Console.WriteLine("you do not have enough money to purchase this");
+						Console.WriteLine("would you like to buy something?");
+						buyYN = Console.ReadLine();
+					}
+					Array.Resize<string>(ref inv, lengthOfInvForTechnicalReasons++);
+					inv[lengthOfInvForTechnicalReasons] = "lucky charm";
+					inv[inv.Length-1] = "lucky charm";
+					break;
+				case "hollow points":
+					if (money >= 25)
+					{
+					money -= 25;
+					}
+					else
+					{
+						Console.WriteLine("you do not have enough money to purchase this");
+						Console.WriteLine("would you like to buy something?");
+						buyYN = Console.ReadLine();
+					}
+					Array.Resize<string>(ref inv, lengthOfInvForTechnicalReasons++);
+					inv[lengthOfInvForTechnicalReasons] = "hollow points";
+					inv[inv.Length-1] = "hollow points";
+					break;
+				case "apple pie":
+					if (money >= 5)
+					{
+						money -= 5;
+					}
+					else
+					{
+						Console.WriteLine("you do not have enough money to purchase this");
+						Console.WriteLine("would you like to buy something?");
+						buyYN = Console.ReadLine();
+					}
+					Array.Resize<string>(ref inv, lengthOfInvForTechnicalReasons++);
+					inv[lengthOfInvForTechnicalReasons] = "apple pie";
+					inv[inv.Length-1] = "apple pie";
+					break;
+				case "box o mystery":
+					if (money >= 35)
+					{
+						money -= 35;
+					}
+					else
+					{
+						Console.WriteLine("you do not have enough money to purchase this");
+						Console.WriteLine("would you like to buy something?");
+						buyYN = Console.ReadLine();
+					}
+					Array.Resize<string>(ref inv, lengthOfInvForTechnicalReasons++);
+					inv[lengthOfInvForTechnicalReasons] = "box o' mystery";
+					break;
+				default:
+					Console.WriteLine("this item does not exist");
+					Console.WriteLine("please try again");
+					System.Threading.Thread.Sleep(500);
+					Console.WriteLine("");
+					Console.WriteLine("what would you like to buy?");
+					askToBuy = Console.ReadLine();
+					break;
+			}
+		} 
+		else if (buyYN == "no") {
+			Console.WriteLine("");
+			Console.WriteLine("goodbye!");
+			Console.WriteLine("");
+			askLoc();
+		}
+		else
+		{
+			Console.WriteLine("that is not a valid action");
+			Console.WriteLine("please try again");
+			System.Threading.Thread.Sleep(500);
+			Console.WriteLine("");
+			Console.WriteLine("would you like to buy something?");
+			buyYN = Console.ReadLine();
+		}
+	}
+	public static void trainStation()
+	{
+		
+	}
+	public static void stats()
+	{
+		System.Threading.Thread.Sleep(500);
+		Console.WriteLine("stats:");
+		Console.WriteLine("");
+		Console.WriteLine("health:");
+		Console.WriteLine(health);
+		Console.WriteLine("");
+		Console.WriteLine("money:");
+		Console.WriteLine(money);
+		Console.WriteLine("");
+		Console.WriteLine("ammo:");
+		Console.WriteLine(ammo);
+		Console.WriteLine("");
+		Console.WriteLine("weapon damage:");
+		Console.WriteLine(dmg);
+		Console.WriteLine("");
+		Console.WriteLine("current weapon accuracy:");
+		Console.WriteLine("one in " + acc + " chance of missing a shot, or a " + 100/acc + "% chance of missing");
+		Console.WriteLine("");
+		Console.WriteLine("inventory:");
+		Console.WriteLine("");
+		foreach (var i in inv)
+		{
+			Console.Write(i + ",");
+		}
+	}
+	public static void askLoc() 
+	{
+		if (noLoc == true)
+		{
+			Console.WriteLine("");
+			Console.WriteLine("sorry, location " + locAsk + " does not exist,");
+			Console.WriteLine("please try again");
+			System.Threading.Thread.Sleep(500);
+		}	
+		Console.WriteLine("");
+		Console.WriteLine("where would you like to go?");
+		foreach (var i in location)
+		{
+			Console.WriteLine(i);
+		}
+		Console.WriteLine("");
+		locAsk = Console.ReadLine();
+		switch (locAsk) 
+		{
+			case "bounties":
+				bounties();
+				break;
+			case "blacksmith":
+				blacksmith();
+				break;
+			case "general store":
+				generalStore();
+				break;
+			case "train station":
+				trainStation();
+				break;
+			case "stats":
+				stats();
+				break;
+			default:
+				noLoc = true;
+				askLoc();
+				break;
+		}		
+	}	
+	public static void intro()
+	{
+		Console.WriteLine("howdy partner");
+		Console.WriteLine("whats yer name?");
+		cowboyname = Console.ReadLine();
+		Console.WriteLine("hello " + cowboyname + "!");
+		Console.WriteLine("welcome to westown, population 321");
+		Console.WriteLine("youll start with a revolver, $100, and a horse");
+		Console.WriteLine("you can collect bounties at the center of town");
+		Console.WriteLine("the blacksmith sells guns and bullets");
+		Console.WriteLine("the general store has food, clothes, and better horses");
+		Console.WriteLine("the train station has trains come every once and a while, ");
+		Console.WriteLine("and when they do, the have limited time goods");
+		Console.WriteLine("if you commit any crimes, you can become an outlaw");
+		Console.WriteLine("you can also look at your stats when you are asked where to go");
+		Console.WriteLine("this means that other cowboys are more likely to attack or kill you");
+		System.Threading.Thread.Sleep(1000);
+		askLoc();
+	}	
+	public static string cowboyname = "default";
+	public static void Main()
+	{
+		intro();
+	}
+}
+// all this in 277 lines. wow. - willdevstill 7/18/22
